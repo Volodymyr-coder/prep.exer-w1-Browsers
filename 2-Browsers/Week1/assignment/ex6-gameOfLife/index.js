@@ -156,17 +156,16 @@ export function createGame(context, numRows, numColumns) {
       }
       if (cell.nextAlive) {
         if (cell.alive) {
-          // A living cell that remains living should have its lifeTime incremented by one
           cell.lifeTime += 1;
         } else {
-          //A dead cell that is brought to life should have its lifeTime reset to one
-          cell.lifeTime = 1;
+          if (cell.alive) {
+            cell.lifeTime = 0;
+          }
+          
         }
       } else {
-        if (cell.alive) {
-          // A living cell that dies should have its lifeTime reset to zero
-          cell.lifeTime = 0;
-        }
+        cell.lifeTime = 1;
+
       }
     });
 
